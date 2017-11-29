@@ -19,6 +19,8 @@
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
+                font-size: 100px;
+                letter-spacing: 1px;
             }
 
             .full-height {
@@ -55,7 +57,7 @@
                 font-size: 84px;
             }
 
-            .links > a {
+            a {
                 color: #636b6f;
                 padding: 0 25px;
                 font-size: 12px;
@@ -89,11 +91,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <a href="{{ route('jquery.index') }}">
+                    <a href="{{ route('jquery.index') }}" alt="jQuery Example">
                         <img src="/img/jquery-logo.gif"/>
                     </a>
                         =>
-                    <a href="{{ route('vue.index') }}">
+                    <a href="{{ route('vue.index') }}" alt="Vue Example">
                         <img src="/img/vue-logo.png"/>
                     </a>
                 </div>

@@ -29,8 +29,7 @@
         <div v-else>
             <table class="table table-hover">
                 <caption v-if="customer_id">
-                    Customer ID: {{ customer_id }}
-                    | {{ validQuotes.length }} of {{ quotes.length }} quote | <label><input type="checkbox" v-model="show_all"/>Show All</label>
+                    Customer ID: {{ customer_id }} | {{ validQuotes.length }} of {{ quotes.length }} quote | <label><input type="checkbox" v-model="show_all"/>Show All</label>
                 </caption>
                 <thead>
                     <tr>

@@ -66,7 +66,7 @@
             "<th scope='row'>" + data.id + "</th>" +
             "<td>" + data.insurer + "</td>" +
             "<td class='text-right'>" + data.scheme_no + "</td>" +
-            "<td class='text-right font-weight-bold'>£" + data.premium + "</td>" +
+            "<td class='text-right font-weight-bold'>£" + data.premium.toFixed(2) + "</td>" +
             "<td>" + data.cover_type + "</td>" +
             "<td>" + data.notes + "</td>";
 
