@@ -79,15 +79,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Jquery => Vue
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ route('jquery.index') }}">jQuery</a>
+                    <a href="{{ route('vue.index') }}">Vue</a>
+                    <a href="{{ route('emergency.index') }}">Click in case of emergency</a>
                 </div>
             </div>
         </div>
