@@ -33,11 +33,12 @@ Route::get('/data/quotes', function(\Faker\Generator $faker){
             'cover_type' => array_random($coverTypes, 1)[0],
             'customer_id' => $customerId,
             'insurer' => array_random($insurers, 1)[0],
-            'premium' => $faker->numberBetween(500, 2000),
             'voluntary' => $faker->numberBetween(0, 750),
             'scheme_no' => $faker->unique()->numberBetween(100, 500),
             'valid' => $valid = $faker->boolean,
+            'premium' => ($valid) ? $faker->numberBetween(500, 2000) : 0,
             'notes' => (!$valid)? $faker->sentence : '',
+
         ];
     }
 

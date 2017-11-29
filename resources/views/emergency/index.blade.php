@@ -24,8 +24,7 @@
         <br>
 
         <div v-if="loading" class="text-center">
-            <img src="/img/rs.gif" alt="Thinking about it..."/>
-            <p class="text-center">Don't live code for your first talk...</p>
+            <img src="/img/rs-t.gif" alt="Thinking about it..."/>
         </div>
         <div v-else>
             <table class="table table-hover">
@@ -53,9 +52,9 @@
                         <td class='text-right fold-weight-bold'>£{{ quote.premium.toFixed(2) }}</td>
                         <td>{{ quote.cover_type }}</td>
                         <td>{{ quote.note }}</td>
-                        <td>
+                        <td class="text-center">
                             <button v-if="quote.valid" class="btn btn-primary"><i class='fa fa-check'></i>&nbsp;Select</button>
-                            <button v-else class="btn btn-error"><i class='fa fa-times'></i>&nbsp;Select</button>
+                            <button v-else class="btn btn-danger"><i class='fa fa-times'></i>&nbsp;Invalid</button>
                         </td>
                     </tr>
                 </tbody>
@@ -65,10 +64,10 @@
     </div>
 </div>
 @endverbatim
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<script src="/js/vue.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 
 <script>
     const app = new Vue({
@@ -87,7 +86,14 @@
               return this.quotes.filter((quote) => {
                   return this.show_all || quote.valid;
               }).sort((quoteA, quoteB) => {
-                  return quoteA.premium < quoteB.premium;
+                  // put quotes with 0 values at the end of the list...
+                  if(quoteA.premium === 0){
+                    return 1;
+                  }else if(quoteB.premium === 0) {
+                    return -1;
+                  }
+
+                  return quoteA.premium > quoteB.premium;
               });
           }
         },
@@ -104,7 +110,7 @@
                         this.quotes = json;
                         this.customer_id = json[0].customer_id;
                         this.loading = false;
-                    }, 2500);
+                    }, 3500);
                 });
             }
         }

@@ -44,9 +44,9 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 
 <script>
 
@@ -56,32 +56,33 @@
             type: "GET",
             dataType: "json",
         }).done(function (json) {
+          setTimeout(function() {
             var tbody = $('#tblQuotes tbody');
             tbody.empty();
 
             var items = [];
             $.each(json, function (key, data) {
-                var row = "<tr>" +
-                    "<th scope='row'>" + data.id + "</th>" +
-                    "<td>" + data.insurer + "</td>" +
-                    "<td class='text-right'>" + data.scheme_no + "</td>" +
-                    "<td class='text-right font-weight-bold'>£" + data.premium + "</td>" +
-                    "<td>" + data.cover_type + "</td>" +
-                    "<td>" + data.notes + "</td>";
+              var row = "<tr>" +
+                "<th scope='row'>" + data.id + "</th>" +
+                "<td>" + data.insurer + "</td>" +
+                "<td class='text-right'>" + data.scheme_no + "</td>" +
+                "<td class='text-right font-weight-bold'>£" + data.premium + "</td>" +
+                "<td>" + data.cover_type + "</td>" +
+                "<td>" + data.notes + "</td>";
 
-                if( data.valid ) {
-                    row += "<td><button type='button' class='btn btn-primary'><i class='fa fa-check'></i>&nbsp;Select</button></td>"
-                }else {
-                    row += "<td><button type='button' class='btn btn-error'><i class='fa fa-times'></i>&nbsp;Invalid</button></td>"
-                }
-                row += "</tr>";
+              if (data.valid) {
+                row += "<td><button type='button' class='btn btn-primary'><i class='fa fa-check'></i>&nbsp;Select</button></td>"
+              } else {
+                row += "<td><button type='button' class='btn btn-danger'><i class='fa fa-times'></i>&nbsp;Invalid</button></td>"
+              }
+              row += "</tr>";
 
-                items.push(row);
+              items.push(row);
             });
 
             tbody.append(items.join(""));
             $('#customer_id').text('Customer: ' + json[0].customer_id);
-
+          }, 1000);
         });
     }
 

@@ -31,6 +31,12 @@
                 justify-content: center;
             }
 
+            .flex-center-row {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
             .position-ref {
                 position: relative;
             }
@@ -62,6 +68,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            img{
+                max-width: 275px;
+            }
         </style>
     </head>
     <body>
@@ -79,13 +89,17 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Jquery => Vue
+                    <a href="{{ route('jquery.index') }}">
+                        <img src="/img/jquery-logo.gif"/>
+                    </a>
+                        =>
+                    <a href="{{ route('vue.index') }}">
+                        <img src="/img/vue-logo.png"/>
+                    </a>
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('jquery.index') }}">jQuery</a>
-                    <a href="{{ route('vue.index') }}">Vue</a>
-                    <a href="{{ route('emergency.index') }}">Click in case of emergency</a>
+                    <a href="{{ route('emergency.index') }}">Emergency</a>
                 </div>
             </div>
         </div>
