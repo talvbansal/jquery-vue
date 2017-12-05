@@ -12,8 +12,9 @@
 </head>
 <body>
 
+@verbatim
 <div class="container-fluid">
-    <div id="content">
+    <div id="app">
         <div>
             <h1>Vue example</h1>
             <hr/>
@@ -26,13 +27,13 @@
             <caption id="customer_id"></caption>
             <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Insurer</th>
-                <th scope="col">Scheme</th>
-                <th scope="col">Premium</th>
-                <th scope="col">Cover Type</th>
-                <th scope="col">Notes</th>
-                <th scope="col">Select</th>
+                <th style="width: 5%;" scope="col">ID</th>
+                <th style="width: 15%;" scope="col">Insurer</th>
+                <th style="width: 5%;" scope="col">Scheme</th>
+                <th style="width: 10%;" scope="col">Premium</th>
+                <th style="width: 20%;" scope="col">Cover Type</th>
+                <th style="width: 30%;" scope="col">Notes</th>
+                <th style="width: 15%;" scope="col">Select</th>
             </tr>
             </thead>
 
@@ -43,20 +44,50 @@
 
     </div>
 </div>
+@endverbatim
 
 <script src="/js/jquery-3.2.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/vue.js"></script>
 
 <script>
+  // # todo
+  // [x] add vue library to page
+  // [x] create a vue instance
+  // [ ] identify items of interest
+  // [ ] move presentation markup to the actual markup
+  // [ ] filter quote items to only show valid quotes
+  // [ ] order quotes to show cheapest at the top
+  // [ ] add a toggle to show all or filtered quotes
+  // [ ] add a loader
+
+  // # take aways
+  // [ ] hand over DOM manipulation to Vue framework
+  // [ ] use v-for v-if v-else directives
+
+  const app = new Vue({
+    el: '#app',
+    computed:{
+
+    },
+    data:{
+
+    },
+    methods:{
+
+    }
+  });
+
 
   function fetchQuotes() {
-    $.ajax({
-      url: "/data/quotes",
-      type: "GET",
-      dataType: "json",
-    }).done(function (json) {
-      setTimeout(function() {
+    setTimeout(function () {
+      $.ajax({
+        url: "/data/quotes",
+        type: "GET",
+        dataType: "json",
+      }).done(function (json) {
+
         var tbody = $('#tblQuotes tbody');
         tbody.empty();
 
@@ -73,7 +104,7 @@
           if (data.valid) {
             row += "<td><button type='button' class='btn btn-primary'><i class='fa fa-check'></i>&nbsp;Select</button></td>"
           } else {
-            row += "<td><button type='button' class='btn btn-danger'><i class='fa fa-times'></i>&nbsp;Invalid</button></td>"
+            row += "<td><button type='butto n' class='btn btn-danger'><i class='fa fa-times'></i>&nbsp;Invalid</button></td>"
           }
           row += "</tr>";
 
@@ -82,8 +113,8 @@
 
         tbody.append(items.join(""));
         $('#customer_id').text('Customer: ' + json[0].customer_id);
-      }, 1000);
-    });
+      });
+    }, 1000);
   }
 
   $(document).ready(function () {
