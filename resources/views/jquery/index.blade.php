@@ -13,7 +13,7 @@
 <body>
 
 <div class="container-fluid">
-    <div id="content">
+    <div id="app">
         <div>
             <h1>jQuery example</h1>
             <hr/>
@@ -25,15 +25,15 @@
         <table id="tblQuotes" class="table table-hover">
             <caption id="customer_id"></caption>
             <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Insurer</th>
-                    <th scope="col">Scheme</th>
-                    <th scope="col">Premium</th>
-                    <th scope="col">Cover Type</th>
-                    <th scope="col">Notes</th>
-                    <th scope="col">Select</th>
-                </tr>
+            <tr>
+                <th style="width: 5%;" scope="col">ID</th>
+                <th style="width: 15%;" scope="col">Insurer</th>
+                <th style="width: 5%;" scope="col">Scheme</th>
+                <th style="width: 10%;" scope="col">Premium</th>
+                <th style="width: 20%;" scope="col">Cover Type</th>
+                <th style="width: 30%;" scope="col">Notes</th>
+                <th style="width: 15%;" scope="col">Select</th>
+            </tr>
             </thead>
 
             <tbody>
@@ -50,45 +50,45 @@
 
 <script>
 
-    function fetchQuotes() {
-        $.ajax({
-            url: "/data/quotes",
-            type: "GET",
-            dataType: "json",
-        }).done(function (json) {
-          setTimeout(function() {
-            var tbody = $('#tblQuotes tbody');
-            tbody.empty();
+  function fetchQuotes() {
+    setTimeout(function () {
+      $.ajax({
+        url: "/data/quotes",
+        type: "GET",
+        dataType: "json",
+      }).done(function (json) {
+        var tbody = $('#tblQuotes tbody');
+        tbody.empty();
 
-            var items = [];
-            $.each(json, function (key, data) {
-              var row = "<tr>" +
-                "<th scope='row'>" + data.id + "</th>" +
-                "<td>" + data.insurer + "</td>" +
-                "<td class='text-right'>" + data.scheme_no + "</td>" +
-                "<td class='text-right font-weight-bold'>£" + data.premium.toFixed(2) + "</td>" +
-                "<td>" + data.cover_type + "</td>" +
-                "<td>" + data.notes + "</td>";
+        var items = [];
+        $.each(json, function (key, data) {
+          var row = "<tr>" +
+            "<th scope='row'>" + data.id + "</th>" +
+            "<td>" + data.insurer + "</td>" +
+            "<td class='text-right'>" + data.scheme_no + "</td>" +
+            "<td class='text-right font-weight-bold'>£" + data.premium.toFixed(2) + "</td>" +
+            "<td>" + data.cover_type + "</td>" +
+            "<td>" + data.notes + "</td>";
 
-              if (data.valid) {
-                row += "<td><button type='button' class='btn btn-primary'><i class='fa fa-check'></i>&nbsp;Select</button></td>"
-              } else {
-                row += "<td><button type='button' class='btn btn-danger'><i class='fa fa-times'></i>&nbsp;Invalid</button></td>"
-              }
-              row += "</tr>";
+          if (data.valid) {
+            row += "<td><button type='button' class='btn btn-primary'><i class='fa fa-check'></i>&nbsp;Select</button></td>"
+          } else {
+            row += "<td><button type='button' class='btn btn-danger'><i class='fa fa-times'></i>&nbsp;Invalid</button></td>"
+          }
+          row += "</tr>";
 
-              items.push(row);
-            });
-
-            tbody.append(items.join(""));
-            $('#customer_id').text('Customer: ' + json[0].customer_id);
-          }, 1000);
+          items.push(row);
         });
-    }
 
-    $(document).ready(function () {
-        $('#fetchQuotes').click(fetchQuotes);
-    });
+        tbody.append(items.join(""));
+        $('#customer_id').text('Customer: ' + json[0].customer_id);
+      });
+    }, 1000);
+  }
+
+  $(document).ready(function () {
+    $('#fetchQuotes').click(fetchQuotes);
+  });
 
 </script>
 
