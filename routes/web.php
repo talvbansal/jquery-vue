@@ -30,9 +30,9 @@ Route::get('/data/quotes', function(\Faker\Generator $faker){
     {
         $data[] = (object)[
             'id' => $i + 1,
-            'cover_type' => array_random($coverTypes, 1)[0],
+            'cover_type' => array_random($coverTypes),
             'customer_id' => $customerId,
-            'insurer' => array_random($insurers, 1)[0],
+            'insurer' => array_random($insurers),
             'voluntary' => $faker->numberBetween(0, 750),
             'scheme_no' => $faker->unique()->numberBetween(100, 500),
             'valid' => $valid = $faker->boolean,
